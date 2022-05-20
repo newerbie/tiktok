@@ -281,6 +281,7 @@ type ProductSKU struct {
 	SellerSku       string           `json:"seller_sku"`
 	SalesAttributes []SalesAttribute `json:"sales_attributes"`
 }
+
 type Brand struct {
 	ID     string `json:"id"`
 	Name   string `json:"name"`
@@ -357,6 +358,7 @@ type Price struct {
 	OriginalPrice   string `json:"original_price"`
 	PriceIncludeVat string `json:"price_include_vat"`
 }
+
 type SalesAttr struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
@@ -377,6 +379,7 @@ type ProductAttribute struct {
 	Values []Value `json:"values"`
 }
 
+// ProductData is return body from https://developers.tiktok-shops.com/documents/document/237488
 type ProductData struct {
 	ProductID      string     `json:"product_id"`
 	ProductStatus  int        `json:"product_status"` // 1-draft、2-pending、3-failed(initial creation)、4-live、5-seller_deactivated、6-platform_deactivated、7-freeze 8-deleted
@@ -406,28 +409,26 @@ type ProductData struct {
 	DeliveryServices      []DeliveryService  `json:"delivery_services"`
 }
 
+type SKUItem struct {
+	ID         string      `json:"id"`
+	Price      Price       `json:"price"`
+	SellerSku  string      `json:"seller_sku"`
+	StockInfos []StockInfo `json:"stock_infos"`
+}
+
+type ProductItem struct {
+	CreateTime  int       `json:"create_time"`
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	SaleRegions []string  `json:"sale_regions"`
+	Skus        []SKUItem `json:"skus"`
+	Status      int       `json:"status"`
+	UpdateTime  int       `json:"update_time"`
+}
+
 type GetProductListData struct {
-	Products []struct {
-		CreateTime  int      `json:"create_time"`
-		ID          string   `json:"id"`
-		Name        string   `json:"name"`
-		SaleRegions []string `json:"sale_regions"`
-		Skus        []struct {
-			ID    string `json:"id"`
-			Price struct {
-				Currency      string `json:"currency"`
-				OriginalPrice string `json:"original_price"`
-			} `json:"price"`
-			SellerSku  string `json:"seller_sku"`
-			StockInfos []struct {
-				WarehouseID    string `json:"warehouse_id"`
-				AvailableStock int    `json:"available_stock"`
-			} `json:"stock_infos"`
-		} `json:"skus"`
-		Status     int `json:"status"`
-		UpdateTime int `json:"update_time"`
-	} `json:"products"`
-	Total int `json:"total"`
+	Products []ProductItem `json:"products"`
+	Total    int           `json:"total"`
 }
 
 type UpdatePriceData struct {
@@ -435,7 +436,7 @@ type UpdatePriceData struct {
 }
 
 type FailedSKUStock struct {
-	ID                 string   `json:"id"`
+	SKUID              string   `json:"sku_id"`
 	FailedWarehouseIDs []string `json:"failed_warehouse_ids"`
 }
 

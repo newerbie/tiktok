@@ -1,0 +1,1573 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is product api swagger doc.",
+        "title": "Swagger Product API",
+        "contact": {
+            "name": "yan.jinbin",
+            "email": "yan.jinbin@shipper.id"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v0.0.1"
+    },
+    "host": "127.0.0.1:10000",
+    "basePath": "/v1",
+    "paths": {
+        "/v1/brands": {
+            "get": {
+                "description": "Marketplace open api doc link. Lazada: https://bit.ly/3l8loTF shopee: https://bit.ly/3L7JMQ5 Tokopedia: Tiktok: https://bit.ly/3FO6Pym\ne.g. get brand list like Apple Google Facebook Airbnb",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brand"
+                ],
+                "summary": "get brand list from marketplace",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: page number",
+                        "name": "page_no",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: page size",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTBrandListResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/categories": {
+            "get": {
+                "description": "Marketplace open api doc link. Lazada: https://bit.ly/3wbFq64, shopee: https://bit.ly/3l7cjKT, Tokopedia: https://bit.ly/39fr2Rj, Tiktok: https://bit.ly/3FI0HaM\ne.g. get category tree, like telecommunication-\u003emobile phone-\u003e iphone -\u003e iphone 13 series",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "Get category tree or dictionary from marketplace",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPCategoryTreeResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/categories/{category_id}/attributes": {
+            "get": {
+                "description": "Marketplace open api doc link. Lazada: https://bit.ly/3Ncd0yp  shopee: https://bit.ly/3PxuYOb  Tokopedia: https://bit.ly/3Lwltvj Tiktok: https://bit.ly/3wtQdrm\ne.g. under category_id 100, product attributes, include mandatory or not, are waterproof fireproof isDangerous R18",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "get category attributes from marketplace",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "category_id",
+                        "name": "category_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPProductAttrsResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/products": {
+            "get": {
+                "description": "Marketplace open api doc link. Lazada: batch query https://bit.ly/3MfPaBQ single query https://bit. ly/39mmw3i, shopee: https://bit.ly/3syQb0h get_item_list-\u003eget_item_base_info-\u003eget_item_extra_info Tokopedia: https://bit.ly/3PdbI8e Tiktok: https://bit.ly/3l7AkBy\ne.g. get Apple iphone series product list, iPhone15  red/green iphone16 black/white",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Refer current Atoor: https://dashboard.staging.atoor.com/ocms/product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: page number",
+                        "name": "page_no",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: page size",
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPProductListResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Marketplace open api doc link. Lazada: https://bit.ly/3PwiIgO shopee: https://bit.ly/3LjQimY Tokopedia: https://bit.ly/3wqKD9c  Tiktok: https://bit.ly/3NaZiMr\ne.g. create iphone-13 256GB on tiktok shop.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "create product on multiple marketplaces, how to create a product refer link: lazada usecase-\u003e https://bit.ly/3yym6BG",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Create Product metadata fields",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.AddEditProductReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPAddEditProductOpResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Marketplace open api doc link. tokopedia: https://bit.ly/38fpR4n, lazada: https://bit.ly/3yCt7l4 shopee: https://bit.ly/3wtMMAY tiktok: https://bit.ly/38qiuHe\nbatch delete product from product list, e.g. delete iphone 13 red/black 256GB from shop product list",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "batch delete product from product list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Delete Product From Shelf",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.ProductIDSRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPEmptyResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/products/active": {
+            "post": {
+                "description": "Marketplace open api doc link. Lazada: https://bit.ly/37Ix6kR shopee: https://bit.ly/3wbm6G6 Tokopedia: https://bit.ly/3wkDsiH Tiktok: https://bit.ly/3sxkOTu\ne.g. iphone 13 red 256GB is top seller goods. so we often activate it",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "batch activate products on shelf",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "activate Product From Shelf",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.ProductIDSRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPEmptyResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/products/inactive": {
+            "post": {
+                "description": "Marketplace open api doc link. Lazada: https://bit.ly/37Ix6kR shopee: https://bit.ly/3wbm6G6 Tokopedia: https://bit.ly/3wkDsiH Tiktok: https://bit.ly/3sxkOTu\ne.g. iphone 13 red 256GB is top seller goods. so we often deactivate it for the sake of shortage",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "batch deactivate products from shelf",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "deactivate Product From Shelf",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.ProductIDSRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPEmptyResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/products/{product_id}": {
+            "patch": {
+                "description": "Marketplace open api doc link. lazada: https://bit.ly/3ld8CU5 shopee: https://bit.ly/3lg4vX7 tokopedia: https://bit.ly/3FJFEV4 tiktok: https://bit.ly/3lb5VCs\ne.g. edie package weight,width, height, is_dangerous",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "edit product attributes",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Product attributes",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.AddEditProductReq"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "product id",
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPUpdateProductResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/products/{product_id}/price": {
+            "put": {
+                "description": "Marketplace open api doc link. lazada: https://bit.ly/3yBQVVV shopee: https://bit.ly/3Pn4HSe tokopedia: https://bit.ly/3PoACBR tiktok: https://bit.ly/3szsTHt\ne.g. old price is 1000Rp, new price is 668Rp",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "update product price",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Product Price",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UpdateProductPriceRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "product id",
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPEmptyResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/products/{product_id}/stock": {
+            "put": {
+                "description": "Marketplace open api doc link. lazada: https://bit.ly/3yBQVVV shopee: https://bit.ly/3wrusIL tokopedia: https://bit.ly/3NcVf1Z tiktok: https://bit.ly/3sAyf57\nupdate product stock at specific warehouse, e.g. update stock from 1 to 100 at specific warehouse",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "update product stock at specific warehouse",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization signature",
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "enum": [
+                            "mock-positive",
+                            "mock-negative"
+                        ],
+                        "type": "string",
+                        "description": "test-id Key via Header",
+                        "name": "x-test-id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "common query params: shop id",
+                        "name": "shop_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "common query params: marketplace type",
+                        "name": "mp",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Product Stock",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UpdateProductStockRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "product id",
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPEmptyResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/entity.HTTPErrResp"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entity.AddEditProductOpData": {
+            "type": "object",
+            "properties": {
+                "fail_rows_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "fail_reason": {
+                                "type": "string"
+                            },
+                            "request_id": {
+                                "type": "string"
+                            },
+                            "seller_sku": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "success_count": {
+                    "type": "integer"
+                },
+                "success_rows_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "product_id": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "total_count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.AddEditProductReq": {
+            "type": "object",
+            "properties": {
+                "brand_id": {
+                    "type": "string"
+                },
+                "category_id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "usually rich text,contains media file, like image, video content."
+                },
+                "images_url_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "is_dangerous": {
+                    "type": "boolean"
+                },
+                "is_single_product": {
+                    "type": "boolean"
+                },
+                "min_order": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "ProductID              string                  `json:\"product_id,omitempty\" example:\"when call EditProduct API\"`",
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "price_currency": {
+                    "type": "string"
+                },
+                "product_condition": {
+                    "type": "string"
+                },
+                "product_status": {
+                    "type": "string"
+                },
+                "product_weight": {
+                    "type": "integer"
+                },
+                "short_description": {
+                    "type": "string"
+                },
+                "standard_shipper_option_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.StandardShipperOption"
+                    }
+                },
+                "standard_sku_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.StandardSKU"
+                    }
+                },
+                "warrant_policy": {
+                    "$ref": "#/definitions/entity.WarrantPolicy"
+                },
+                "weight_unit": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Attribute": {
+            "type": "object",
+            "properties": {
+                "attribute_type": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "input_type": {
+                    "$ref": "#/definitions/entity.InputType"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Value"
+                    }
+                }
+            }
+        },
+        "entity.BrandListData": {
+            "type": "object",
+            "properties": {
+                "brand_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tiktok.Brand"
+                    }
+                }
+            }
+        },
+        "entity.HTTBrandListResp": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/entity.BrandListData"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                },
+                "pagination": {
+                    "$ref": "#/definitions/entity.Pagination"
+                }
+            }
+        },
+        "entity.HTTPAddEditProductOpResp": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/entity.AddEditProductOpData"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                }
+            }
+        },
+        "entity.HTTPCategoryTreeResp": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tiktok.Category"
+                    }
+                },
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                }
+            }
+        },
+        "entity.HTTPEmptyResp": {
+            "type": "object",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                }
+            }
+        },
+        "entity.HTTPErrResp": {
+            "type": "object",
+            "properties": {
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                }
+            }
+        },
+        "entity.HTTPProductAttrsResp": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/entity.ProductAttrsData"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                }
+            }
+        },
+        "entity.HTTPProductListResp": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/entity.ProductDetailListData"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                },
+                "pagination": {
+                    "$ref": "#/definitions/entity.Pagination"
+                }
+            }
+        },
+        "entity.HTTPUpdateProductResp": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/entity.AddEditProductOpData"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/entity.Meta"
+                }
+            }
+        },
+        "entity.InputType": {
+            "type": "object",
+            "properties": {
+                "is_customized": {
+                    "type": "boolean"
+                },
+                "is_mandatory": {
+                    "type": "boolean"
+                },
+                "is_multiple_selected": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "entity.Meta": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "status_code": {
+                    "type": "integer"
+                },
+                "timestamp": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Pagination": {
+            "type": "object",
+            "properties": {
+                "current_elements": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "current_page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "cursor_end": {
+                    "type": "string"
+                },
+                "cursor_start": {
+                    "type": "string"
+                },
+                "has_next_page": {
+                    "type": "boolean"
+                },
+                "next_offset": {
+                    "type": "integer"
+                },
+                "sort_by": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "total_elements": {
+                    "type": "integer",
+                    "example": 50
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 5
+                },
+                "total_variants": {
+                    "type": "integer",
+                    "example": 50
+                }
+            }
+        },
+        "entity.ProductAttrsData": {
+            "type": "object",
+            "properties": {
+                "attributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Attribute"
+                    }
+                }
+            }
+        },
+        "entity.ProductDetailListData": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.ProductItem"
+                    }
+                }
+            }
+        },
+        "entity.ProductIDSRequest": {
+            "type": "object",
+            "properties": {
+                "product_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "entity.ProductItem": {
+            "type": "object",
+            "properties": {
+                "Images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "brand_id": {
+                    "type": "string"
+                },
+                "category_id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "string"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "product_status": {
+                    "type": "string"
+                },
+                "skus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.SKUItem"
+                    }
+                }
+            }
+        },
+        "entity.SKUItem": {
+            "type": "object",
+            "properties": {
+                "available_stock": {
+                    "type": "integer"
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "package_height": {
+                    "type": "integer"
+                },
+                "package_length": {
+                    "type": "integer"
+                },
+                "package_weight": {
+                    "type": "integer"
+                },
+                "package_weight_unit": {
+                    "type": "string"
+                },
+                "package_width": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "price_currency": {
+                    "type": "string"
+                },
+                "seller_sku": {
+                    "type": "string"
+                },
+                "sku_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "warehouse_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.SKUPriceItem": {
+            "type": "object",
+            "properties": {
+                "original_price": {
+                    "description": "example:\"default Rp\"",
+                    "type": "integer"
+                },
+                "price_currency": {
+                    "type": "integer"
+                },
+                "sku_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.SKUStockItem": {
+            "type": "object",
+            "properties": {
+                "sku_id": {
+                    "type": "string"
+                },
+                "stock_infos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tiktok.StockInfo"
+                    }
+                }
+            }
+        },
+        "entity.StandardSKU": {
+            "type": "object",
+            "properties": {
+                "attribute_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Attribute"
+                    }
+                },
+                "image_url_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "is_primary": {
+                    "type": "boolean"
+                },
+                "package_height": {
+                    "type": "integer"
+                },
+                "package_length": {
+                    "type": "integer"
+                },
+                "package_weight": {
+                    "type": "integer"
+                },
+                "package_width": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "price_currency": {
+                    "type": "string"
+                },
+                "seller_sku": {
+                    "type": "integer"
+                },
+                "stock_info": {
+                    "$ref": "#/definitions/tiktok.StockInfo"
+                },
+                "weight": {
+                    "type": "integer"
+                },
+                "weight_unit": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.StandardShipperOption": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "is_free_ship": {
+                    "type": "boolean"
+                },
+                "logistic_id": {
+                    "type": "integer"
+                },
+                "ship_fee": {
+                    "type": "integer"
+                },
+                "size_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.UpdateProductPriceRequest": {
+            "type": "object",
+            "required": [
+                "prices"
+            ],
+            "properties": {
+                "prices": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/entity.SKUPriceItem"
+                    }
+                },
+                "product_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.UpdateProductStockRequest": {
+            "type": "object",
+            "properties": {
+                "product_id": {
+                    "type": "string"
+                },
+                "skus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.SKUStockItem"
+                    }
+                }
+            }
+        },
+        "entity.Value": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.WarrantPolicy": {
+            "type": "object",
+            "properties": {
+                "warrant_description": {
+                    "type": "string",
+                    "example": "warrant_type: -1 lifetime,0 No-warrant policy 1 limited 2 full, WarrantTime: day unit "
+                },
+                "warrant_time": {
+                    "type": "integer"
+                },
+                "warrant_type": {
+                    "type": "integer",
+                    "example": -1
+                }
+            }
+        },
+        "tiktok.Brand": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "description": "ONLINE=1;  OFFLINE=2;",
+                    "type": "integer"
+                }
+            }
+        },
+        "tiktok.Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "is_leaf": {
+                    "type": "boolean"
+                },
+                "local_display_name": {
+                    "type": "string"
+                },
+                "parent_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "tiktok.StockInfo": {
+            "type": "object",
+            "properties": {
+                "available_stock": {
+                    "type": "integer"
+                },
+                "warehouse_id": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

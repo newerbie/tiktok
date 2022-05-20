@@ -1,0 +1,1074 @@
+basePath: /v1
+definitions:
+  entity.AddEditProductOpData:
+    properties:
+      fail_rows_data:
+        items:
+          properties:
+            fail_reason:
+              type: string
+            request_id:
+              type: string
+            seller_sku:
+              type: string
+          type: object
+        type: array
+      success_count:
+        type: integer
+      success_rows_data:
+        items:
+          properties:
+            product_id:
+              type: integer
+          type: object
+        type: array
+      total_count:
+        type: integer
+    type: object
+  entity.AddEditProductReq:
+    properties:
+      brand_id:
+        type: string
+      category_id:
+        type: string
+      description:
+        example: usually rich text,contains media file, like image, video content.
+        type: string
+      images_url_list:
+        items:
+          type: string
+        type: array
+      is_dangerous:
+        type: boolean
+      is_single_product:
+        type: boolean
+      min_order:
+        type: integer
+      name:
+        description: ProductID              string                  `json:"product_id,omitempty"
+          example:"when call EditProduct API"`
+        type: string
+      price:
+        type: integer
+      price_currency:
+        type: string
+      product_condition:
+        type: string
+      product_status:
+        type: string
+      product_weight:
+        type: integer
+      short_description:
+        type: string
+      standard_shipper_option_list:
+        items:
+          $ref: '#/definitions/entity.StandardShipperOption'
+        type: array
+      standard_sku_list:
+        items:
+          $ref: '#/definitions/entity.StandardSKU'
+        type: array
+      warrant_policy:
+        $ref: '#/definitions/entity.WarrantPolicy'
+      weight_unit:
+        type: string
+    type: object
+  entity.Attribute:
+    properties:
+      attribute_type:
+        type: integer
+      id:
+        type: string
+      input_type:
+        $ref: '#/definitions/entity.InputType'
+      label:
+        type: string
+      name:
+        type: string
+      values:
+        items:
+          $ref: '#/definitions/entity.Value'
+        type: array
+    type: object
+  entity.BrandListData:
+    properties:
+      brand_list:
+        items:
+          $ref: '#/definitions/tiktok.Brand'
+        type: array
+    type: object
+  entity.HTTBrandListResp:
+    properties:
+      data:
+        $ref: '#/definitions/entity.BrandListData'
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+      pagination:
+        $ref: '#/definitions/entity.Pagination'
+    type: object
+  entity.HTTPAddEditProductOpResp:
+    properties:
+      data:
+        $ref: '#/definitions/entity.AddEditProductOpData'
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+    type: object
+  entity.HTTPCategoryTreeResp:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/tiktok.Category'
+        type: array
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+    type: object
+  entity.HTTPEmptyResp:
+    properties:
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+    type: object
+  entity.HTTPErrResp:
+    properties:
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+    type: object
+  entity.HTTPProductAttrsResp:
+    properties:
+      data:
+        $ref: '#/definitions/entity.ProductAttrsData'
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+    type: object
+  entity.HTTPProductListResp:
+    properties:
+      data:
+        $ref: '#/definitions/entity.ProductDetailListData'
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+      pagination:
+        $ref: '#/definitions/entity.Pagination'
+    type: object
+  entity.HTTPUpdateProductResp:
+    properties:
+      data:
+        $ref: '#/definitions/entity.AddEditProductOpData'
+      metadata:
+        $ref: '#/definitions/entity.Meta'
+    type: object
+  entity.InputType:
+    properties:
+      is_customized:
+        type: boolean
+      is_mandatory:
+        type: boolean
+      is_multiple_selected:
+        type: boolean
+    type: object
+  entity.Meta:
+    properties:
+      error:
+        type: integer
+      message:
+        type: string
+      path:
+        type: string
+      status:
+        type: string
+      status_code:
+        type: integer
+      timestamp:
+        type: string
+    type: object
+  entity.Pagination:
+    properties:
+      current_elements:
+        example: 10
+        type: integer
+      current_page:
+        example: 1
+        type: integer
+      cursor_end:
+        type: string
+      cursor_start:
+        type: string
+      has_next_page:
+        type: boolean
+      next_offset:
+        type: integer
+      sort_by:
+        items:
+          type: string
+        type: array
+      total_elements:
+        example: 50
+        type: integer
+      total_pages:
+        example: 5
+        type: integer
+      total_variants:
+        example: 50
+        type: integer
+    type: object
+  entity.ProductAttrsData:
+    properties:
+      attributes:
+        items:
+          $ref: '#/definitions/entity.Attribute'
+        type: array
+    type: object
+  entity.ProductDetailListData:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/entity.ProductItem'
+        type: array
+    type: object
+  entity.ProductIDSRequest:
+    properties:
+      product_ids:
+        items:
+          type: string
+        type: array
+    type: object
+  entity.ProductItem:
+    properties:
+      Images:
+        items:
+          type: string
+        type: array
+      brand_id:
+        type: string
+      category_id:
+        type: string
+      description:
+        type: string
+      product_id:
+        type: string
+      product_name:
+        type: string
+      product_status:
+        type: string
+      skus:
+        items:
+          $ref: '#/definitions/entity.SKUItem'
+        type: array
+    type: object
+  entity.SKUItem:
+    properties:
+      available_stock:
+        type: integer
+      images:
+        items:
+          type: string
+        type: array
+      package_height:
+        type: integer
+      package_length:
+        type: integer
+      package_weight:
+        type: integer
+      package_weight_unit:
+        type: string
+      package_width:
+        type: integer
+      price:
+        type: integer
+      price_currency:
+        type: string
+      seller_sku:
+        type: string
+      sku_id:
+        type: string
+      status:
+        type: string
+      warehouse_id:
+        type: string
+    type: object
+  entity.SKUPriceItem:
+    properties:
+      original_price:
+        description: example:"default Rp"
+        type: integer
+      price_currency:
+        type: integer
+      sku_id:
+        type: string
+    type: object
+  entity.SKUStockItem:
+    properties:
+      sku_id:
+        type: string
+      stock_infos:
+        items:
+          $ref: '#/definitions/tiktok.StockInfo'
+        type: array
+    type: object
+  entity.StandardSKU:
+    properties:
+      attribute_list:
+        items:
+          $ref: '#/definitions/entity.Attribute'
+        type: array
+      image_url_list:
+        items:
+          type: string
+        type: array
+      is_primary:
+        type: boolean
+      package_height:
+        type: integer
+      package_length:
+        type: integer
+      package_weight:
+        type: integer
+      package_width:
+        type: integer
+      price:
+        type: integer
+      price_currency:
+        type: string
+      seller_sku:
+        type: integer
+      stock_info:
+        $ref: '#/definitions/tiktok.StockInfo'
+      weight:
+        type: integer
+      weight_unit:
+        type: string
+    type: object
+  entity.StandardShipperOption:
+    properties:
+      enabled:
+        type: boolean
+      is_free_ship:
+        type: boolean
+      logistic_id:
+        type: integer
+      ship_fee:
+        type: integer
+      size_id:
+        type: integer
+    type: object
+  entity.UpdateProductPriceRequest:
+    properties:
+      prices:
+        items:
+          $ref: '#/definitions/entity.SKUPriceItem'
+        minItems: 1
+        type: array
+      product_id:
+        type: string
+    required:
+    - prices
+    type: object
+  entity.UpdateProductStockRequest:
+    properties:
+      product_id:
+        type: string
+      skus:
+        items:
+          $ref: '#/definitions/entity.SKUStockItem'
+        type: array
+    type: object
+  entity.Value:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  entity.WarrantPolicy:
+    properties:
+      warrant_description:
+        example: 'warrant_type: -1 lifetime,0 No-warrant policy 1 limited 2 full,
+          WarrantTime: day unit '
+        type: string
+      warrant_time:
+        type: integer
+      warrant_type:
+        example: -1
+        type: integer
+    type: object
+  tiktok.Brand:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        description: ONLINE=1;  OFFLINE=2;
+        type: integer
+    type: object
+  tiktok.Category:
+    properties:
+      id:
+        type: string
+      is_leaf:
+        type: boolean
+      local_display_name:
+        type: string
+      parent_id:
+        type: string
+    type: object
+  tiktok.StockInfo:
+    properties:
+      available_stock:
+        type: integer
+      warehouse_id:
+        type: string
+    type: object
+host: 127.0.0.1:10000
+info:
+  contact:
+    email: yan.jinbin@shipper.id
+    name: yan.jinbin
+  description: This is product api swagger doc.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Swagger Product API
+  version: v0.0.1
+paths:
+  /v1/brands:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: https://bit.ly/3l8loTF shopee: https://bit.ly/3L7JMQ5 Tokopedia: Tiktok: https://bit.ly/3FO6Pym
+        e.g. get brand list like Apple Google Facebook Airbnb
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: 'common query params: page number'
+        in: query
+        name: page_no
+        required: true
+        type: integer
+      - description: 'common query params: page size'
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTBrandListResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: get brand list from marketplace
+      tags:
+      - brand
+  /v1/categories:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: https://bit.ly/3wbFq64, shopee: https://bit.ly/3l7cjKT, Tokopedia: https://bit.ly/39fr2Rj, Tiktok: https://bit.ly/3FI0HaM
+        e.g. get category tree, like telecommunication->mobile phone-> iphone -> iphone 13 series
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPCategoryTreeResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: Get category tree or dictionary from marketplace
+      tags:
+      - category
+  /v1/categories/{category_id}/attributes:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: https://bit.ly/3Ncd0yp  shopee: https://bit.ly/3PxuYOb  Tokopedia: https://bit.ly/3Lwltvj Tiktok: https://bit.ly/3wtQdrm
+        e.g. under category_id 100, product attributes, include mandatory or not, are waterproof fireproof isDangerous R18
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: category_id
+        in: path
+        name: category_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPProductAttrsResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: get category attributes from marketplace
+      tags:
+      - category
+  /v1/products:
+    delete:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. tokopedia: https://bit.ly/38fpR4n, lazada: https://bit.ly/3yCt7l4 shopee: https://bit.ly/3wtMMAY tiktok: https://bit.ly/38qiuHe
+        batch delete product from product list, e.g. delete iphone 13 red/black 256GB from shop product list
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: Delete Product From Shelf
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ProductIDSRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPEmptyResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: batch delete product from product list
+      tags:
+      - product
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: batch query https://bit.ly/3MfPaBQ single query https://bit. ly/39mmw3i, shopee: https://bit.ly/3syQb0h get_item_list->get_item_base_info->get_item_extra_info Tokopedia: https://bit.ly/3PdbI8e Tiktok: https://bit.ly/3l7AkBy
+        e.g. get Apple iphone series product list, iPhone15  red/green iphone16 black/white
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: 'common query params: page number'
+        in: query
+        name: page_no
+        required: true
+        type: integer
+      - description: 'common query params: page size'
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPProductListResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: 'Refer current Atoor: https://dashboard.staging.atoor.com/ocms/product'
+      tags:
+      - product
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: https://bit.ly/3PwiIgO shopee: https://bit.ly/3LjQimY Tokopedia: https://bit.ly/3wqKD9c  Tiktok: https://bit.ly/3NaZiMr
+        e.g. create iphone-13 256GB on tiktok shop.
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: Create Product metadata fields
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.AddEditProductReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPAddEditProductOpResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: 'create product on multiple marketplaces, how to create a product refer
+        link: lazada usecase-> https://bit.ly/3yym6BG'
+      tags:
+      - product
+  /v1/products/{product_id}:
+    patch:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. lazada: https://bit.ly/3ld8CU5 shopee: https://bit.ly/3lg4vX7 tokopedia: https://bit.ly/3FJFEV4 tiktok: https://bit.ly/3lb5VCs
+        e.g. edie package weight,width, height, is_dangerous
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: Update Product attributes
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.AddEditProductReq'
+      - description: product id
+        in: path
+        name: product_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPUpdateProductResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: edit product attributes
+      tags:
+      - product
+  /v1/products/{product_id}/price:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. lazada: https://bit.ly/3yBQVVV shopee: https://bit.ly/3Pn4HSe tokopedia: https://bit.ly/3PoACBR tiktok: https://bit.ly/3szsTHt
+        e.g. old price is 1000Rp, new price is 668Rp
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: Update Product Price
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateProductPriceRequest'
+      - description: product id
+        in: path
+        name: product_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPEmptyResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: update product price
+      tags:
+      - product
+  /v1/products/{product_id}/stock:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. lazada: https://bit.ly/3yBQVVV shopee: https://bit.ly/3wrusIL tokopedia: https://bit.ly/3NcVf1Z tiktok: https://bit.ly/3sAyf57
+        update product stock at specific warehouse, e.g. update stock from 1 to 100 at specific warehouse
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: string
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: Update Product Stock
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UpdateProductStockRequest'
+      - description: product id
+        in: path
+        name: product_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPEmptyResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: update product stock at specific warehouse
+      tags:
+      - product
+  /v1/products/active:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: https://bit.ly/37Ix6kR shopee: https://bit.ly/3wbm6G6 Tokopedia: https://bit.ly/3wkDsiH Tiktok: https://bit.ly/3sxkOTu
+        e.g. iphone 13 red 256GB is top seller goods. so we often activate it
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: integer
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: activate Product From Shelf
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ProductIDSRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPEmptyResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: batch activate products on shelf
+      tags:
+      - product
+  /v1/products/inactive:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Marketplace open api doc link. Lazada: https://bit.ly/37Ix6kR shopee: https://bit.ly/3wbm6G6 Tokopedia: https://bit.ly/3wkDsiH Tiktok: https://bit.ly/3sxkOTu
+        e.g. iphone 13 red 256GB is top seller goods. so we often deactivate it for the sake of shortage
+      parameters:
+      - description: Authorization signature
+        in: header
+        name: Authorization
+        type: string
+      - description: test-id Key via Header
+        enum:
+        - mock-positive
+        - mock-negative
+        in: header
+        name: x-test-id
+        type: string
+      - description: 'common query params: shop id'
+        in: query
+        name: shop_id
+        required: true
+        type: integer
+      - description: 'common query params: marketplace type'
+        in: query
+        name: mp
+        required: true
+        type: integer
+      - description: deactivate Product From Shelf
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.ProductIDSRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.HTTPEmptyResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HTTPErrResp'
+      summary: batch deactivate products from shelf
+      tags:
+      - product
+swagger: "2.0"

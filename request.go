@@ -202,20 +202,22 @@ type ProductSearchRequest struct {
 	CreateTimeTo   int64    `json:"create_time_to,omitempty"`
 }
 type UpdatePriceRequest struct {
-	ProductID string `json:"product_id" validate:"required"`
-	Skus      []struct {
-		ID            string `json:"id" validate:"required"`
-		OriginalPrice string `json:"original_price" validate:"required"`
-	} `json:"skus" validate:"min=1"`
+	ProductID string         `json:"product_id" validate:"required"`
+	Skus      []SKUPriceItem `json:"skus" validate:"min=1"`
+}
+
+type SKUPriceItem struct {
+	SKUID         string `json:"sku_id"`
+	OriginalPrice int    `json:"original_price"` // example:"default Rp"
+	PriceCurrency int    `json:"price_currency"`
+}
+
+type SKUStockItem struct {
+	SKUID      string      `json:"sku_id"`
+	StockInfos []StockInfo `json:"stock_infos"`
 }
 
 type UpdateStockRequest struct {
-	ProductID string `json:"product_id"`
-	Skus      []struct {
-		ID         string `json:"id"`
-		StockInfos []struct {
-			AvailableStock int    `json:"available_stock" validate:"min=0,max=99999"`
-			WarehouseID    string `json:"warehouse_id"`
-		} `json:"stock_infos"`
-	} `json:"skus"`
+	ProductID string         `json:"product_id"`
+	Skus      []SKUStockItem `json:"skus"`
 }
